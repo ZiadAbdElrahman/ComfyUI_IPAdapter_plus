@@ -245,6 +245,9 @@ def ipadapter_execute(model,
     if is_faceidv2:
         weight_faceidv2 = weight_faceidv2 if weight_faceidv2 is not None else weight*2
 
+      if (is_faceidv2 and weight_faceidv2 == 0) or (not is_faceidv2 and weight == 0) :
+        return (model, image)
+          
     cross_attention_dim = 1280 if (is_plus and is_sdxl and not is_faceid and not is_kwai_kolors) or is_portrait_unnorm else output_cross_attention_dim
     clip_extra_context_tokens = 16 if (is_plus and not is_faceid) or is_portrait or is_portrait_unnorm else 4
 
